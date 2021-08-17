@@ -31,7 +31,7 @@ In order to solve this business task, only 6 of the given 18 datasets was used. 
 ___
 
 
-## Processing and Analysis of Data
+## Processing of Data
 Here, I will be transforming and organizing data by adding new columns, extracting information and removing bad data and duplicates.
 
 **In order to get accurate analysis, validate and make sure the dataset does not include any bias, incorrect data, and duplicates.**
@@ -209,15 +209,249 @@ Add dates_d date
 Update minuteMETsNarrow_merged
 Set dates_d = Cast(Date_d as date)
 ```
+___
+
+
+## Analysis of Data
 
 Here, I will be analysing the consumer data to discover trends and patterns. 
 
 ```TSQL
+                                                      --Analysis--
+--Calculate average met per day per user, and compare with the calories burned
 
+Select Distinct t1.Id, t1.dates_d, sum(t1.METs) as sum_mets, t2.Calories
+From [dbo].[minuteMETsNarrow_merged] as t1
+inner join dailyActivity_merged as t2
+on t1.Id = t2.Id and t1.dates_d = t2.Date_d
+Group By t1.Id, t1.dates_d, t2.Calories
+Order by dates_d
 ```
 
+Result: *Data contains 934 rows, this table limits to view the top 50 rows*
+
+| Id         | dates_d    | sum_METs | Calories |
+|------------|------------|----------|----------|
+| 1503960366 | 12-04-2016 | 25241    | 1985     |
+| 1624580081 | 12-04-2016 | 17234    | 1432     |
+| 1644430081 | 12-04-2016 | 22768    | 3199     |
+| 1844505072 | 12-04-2016 | 21704    | 2030     |
+| 1927972279 | 12-04-2016 | 15599    | 2220     |
+| 2022484408 | 12-04-2016 | 23035    | 2390     |
+| 2026352035 | 12-04-2016 | 18830    | 1459     |
+| 2320127002 | 12-04-2016 | 23090    | 2124     |
+| 2347167796 | 12-04-2016 | 24924    | 2344     |
+| 2873212765 | 12-04-2016 | 22570    | 1982     |
+| 3372868164 | 12-04-2016 | 19118    | 1788     |
+| 3977333714 | 12-04-2016 | 20644    | 1450     |
+| 4020332650 | 12-04-2016 | 26521    | 3654     |
+| 4057192912 | 12-04-2016 | 18434    | 2286     |
+| 4319703577 | 12-04-2016 | 14400    | 2115     |
+| 4388161847 | 12-04-2016 | 14400    | 2955     |
+| 4445114986 | 12-04-2016 | 18392    | 2113     |
+| 4558609924 | 12-04-2016 | 20576    | 1909     |
+| 4702921684 | 12-04-2016 | 21040    | 2947     |
+| 5553957443 | 12-04-2016 | 22118    | 2026     |
+| 5577150313 | 12-04-2016 | 26431    | 3405     |
+| 6117666160 | 12-04-2016 | 14400    | 1496     |
+| 6290855005 | 12-04-2016 | 17890    | 2560     |
+| 6775888955 | 12-04-2016 | 14400    | 1841     |
+| 6962181067 | 12-04-2016 | 22065    | 1994     |
+| 7007744171 | 12-04-2016 | 27171    | 2937     |
+| 7086361926 | 12-04-2016 | 24496    | 2772     |
+| 8053475328 | 12-04-2016 | 26168    | 3186     |
+| 8253242879 | 12-04-2016 | 20620    | 2044     |
+| 8378563200 | 12-04-2016 | 24210    | 3635     |
+| 8583815059 | 12-04-2016 | 18896    | 2650     |
+| 8792009665 | 12-04-2016 | 17433    | 2044     |
+| 8877689391 | 12-04-2016 | 32010    | 3921     |
+| 1503960366 | 13-04-2016 | 22859    | 1797     |
+| 1624580081 | 13-04-2016 | 16990    | 1411     |
+| 1644430081 | 13-04-2016 | 20656    | 2902     |
+| 1844505072 | 13-04-2016 | 19880    | 1860     |
+| 1927972279 | 13-04-2016 | 15014    | 2151     |
+| 2022484408 | 13-04-2016 | 25074    | 2601     |
+| 2026352035 | 13-04-2016 | 19636    | 1521     |
+| 2320127002 | 13-04-2016 | 21782    | 2003     |
+| 2347167796 | 13-04-2016 | 21675    | 2038     |
+| 2873212765 | 13-04-2016 | 22820    | 2004     |
+| 3372868164 | 13-04-2016 | 22380    | 2093     |
+| 3977333714 | 13-04-2016 | 21286    | 1495     |
+| 4020332650 | 13-04-2016 | 14400    | 1981     |
+| 4057192912 | 13-04-2016 | 18566    | 2306     |
+| 4319703577 | 13-04-2016 | 17299    | 2135     |
+| 4388161847 | 13-04-2016 | 19246    | 3092     |
+| 4445114986 | 13-04-2016 | 18230    | 2095     |
 
 
+```TSQL
+                                                             
+--Activities and colories comparison
+
+Select Id,
+SUM(TotalSteps) as total_steps,
+SUM(VeryActiveMinutes) as total_Vactive_mins,
+Sum(FairlyActiveMinutes) as total_Factive_mins,
+SUM(LightlyActiveMinutes) as total_Lactive_mins,
+SUM(Calories) as total_calories
+From [dbo].[dailyActivity_merged]
+Group By Id
+```
+
+Result: *Strong correlation between activity intense time and calories burned*
+
+| id         | total_steps | total_Vactive_m | total_Factive_m | total_Lactive_m | calories |
+|------------|-------------|-----------------|-----------------|-----------------|----------|
+| 8583815059 | 223154      | 300             | 688             | 4287            | 84693    |
+| 6117666160 | 197308      | 44              | 57              | 8074            | 63312    |
+| 8053475328 | 457662      | 2640            | 297             | 4680            | 91320    |
+| 4319703577 | 225334      | 111             | 382             | 7092            | 63168    |
+| 4388161847 | 335232      | 718             | 631             | 7110            | 95910    |
+| 6290855005 | 163837      | 80              | 110             | 6596            | 75389    |
+| 2320127002 | 146223      | 42              | 80              | 6144            | 53449    |
+| 1644430081 | 218489      | 287             | 641             | 5354            | 84339    |
+| 2873212765 | 234229      | 437             | 190             | 9548            | 59426    |
+| 1503960366 | 375619      | 1200            | 594             | 6818            | 56309    |
+| 4702921684 | 265734      | 159             | 807             | 7362            | 91932    |
+| 4445114986 | 148693      | 205             | 54              | 6482            | 67772    |
+| 4057192912 | 15352       | 3               | 6               | 412             | 7895     |
+| 1624580081 | 178061      | 269             | 180             | 4758            | 45984    |
+| 8792009665 | 53758       | 28              | 117             | 2662            | 56907    |
+| 2026352035 | 172573      | 3               | 8               | 7956            | 47760    |
+| 3977333714 | 329537      | 567             | 1838            | 5243            | 45410    |
+| 5577150313 | 249133      | 2620            | 895             | 4438            | 100789   |
+| 4558609924 | 238239      | 322             | 425             | 8834            | 63031    |
+| 8378563200 | 270249      | 1819            | 318             | 4839            | 106534   |
+| 1844505072 | 79982       | 4               | 40              | 3579            | 48778    |
+| 7007744171 | 294409      | 807             | 423             | 7299            | 66144    |
+| 8253242879 | 123161      | 390             | 272             | 2221            | 33972    |
+| 2347167796 | 171354      | 243             | 370             | 4545            | 36782    |
+| 4020332650 | 70284       | 161             | 166             | 2385            | 73960    |
+| 6962181067 | 303639      | 707             | 574             | 7620            | 61443    |
+| 6775888955 | 65512       | 286             | 385             | 1044            | 55426    |
+| 5553957443 | 266990      | 726             | 403             | 6392            | 58146    |
+| 1927972279 | 28400       | 41              | 24              | 1196            | 67357    |
+| 7086361926 | 290525      | 1320            | 786             | 4459            | 79557    |
+| 3372868164 | 137233      | 183             | 82              | 6558            | 38662    |
+| 8877689391 | 497241      | 2048            | 308             | 7276            | 106028   |
+| 2022484408 | 352490      | 1125            | 600             | 7981            | 77809    |
+
+```TSQL
+
+--Average Sleep Time per user
+
+Select Id, Avg(TotalMinutesAsleep)/60 as avg_sleep_time_h,
+Avg(TotalTimeInBed)/60 as avg_time_bed_h,
+AVG(TotalTimeInBed - TotalMinutesAsleep) as wasted_bed_time_m
+from sleepDay_merged
+Group by Id
+
+```
+Result: 
+
+| Id         | avg_sleep_time_h | avg_time_bed_h | wasted_bed_time_m |
+|------------|------------------|----------------|-------------------|
+| 1503960366 | 6.004666         | 6.386666       | 22.92             |
+| 1644430081 | 4.9              | 5.766666       | 52                |
+| 1844505072 | 10.866666        | 16.016666      | 309               |
+| 1927972279 | 6.95             | 7.296666       | 20.8              |
+| 2026352035 | 8.436309         | 8.960714       | 31.464285         |
+| 2320127002 | 1.016666         | 1.15           | 8                 |
+| 2347167796 | 7.446666         | 8.188888       | 44.533333         |
+| 3977333714 | 4.894047         | 7.685714       | 167.5             |
+| 4020332650 | 5.822916         | 6.329166       | 30.375            |
+| 4319703577 | 7.94423          | 8.366025       | 25.307692         |
+| 4388161847 | 6.71875          | 7.103472       | 23.083333         |
+
+```TSQL
+
+--Sleep and calories comparison	
+
+Select t1.Id, SUM(TotalMinutesAsleep) as total_sleep_m,
+SUM(TotalTimeInBed) as total_time_inbed_m,
+SUM(Calories) as calories
+From [dbo].[dailyActivity_merged] as t1
+Inner Join [dbo].[sleepDay_merged] as t2
+ON t1.Id = t2.Id and t1.ActivityDate = t2.SleepDay
+Group By t1.Id
+```
+
+Result:
+
+| Id         | total_sleep_m | total_time_inbed_m | calories |
+|------------|---------------|--------------------|----------|
+| 1503960366 | 9007          | 9580               | 46807    |
+| 1644430081 | 1176          | 1384               | 11911    |
+| 1844505072 | 1956          | 2883               | 5029     |
+| 1927972279 | 2085          | 2189               | 11581    |
+| 2026352035 | 14173         | 15054              | 43142    |
+| 2320127002 | 61            | 69                 | 1804     |
+| 2347167796 | 6702          | 7370               | 29570    |
+| 3977333714 | 8222          | 12912              | 43691    |
+| 4020332650 | 2795          | 3038               | 25560    |
+| 4319703577 | 12393         | 13051              | 52642    |
+| 4388161847 | 9675          | 10229              | 75159    |
+| 4445114986 | 10785         | 11671              | 61128    |
+| 4558609924 | 638           | 700                | 10985    |
+| 4702921684 | 11792         | 12375              | 85211    |
+| 5553957443 | 14368         | 15682              | 58146    |
+| 5577150313 | 11232         | 11976              | 92019    |
+| 6117666160 | 8618          | 9183               | 44295    |
+| 6775888955 | 1049          | 1107               | 7034     |
+| 6962181067 | 13888         | 14450              | 61443    |
+| 7007744171 | 137           | 143                | 4301     |
+| 7086361926 | 10875         | 11194              | 63783    |
+| 8053475328 | 891           | 905                | 9928     |
+| 8378563200 | 14187         | 15466              | 110539   |
+| 8792009665 | 6535          | 6807               | 34490    |
+
+
+```TSQL
+
+--Daily Sum Analysis - No trends/patterns found
+
+Select SUM(TotalSteps) as total_steps,
+SUM(TotalDistance) as total_dist,
+SUM(Calories) as total_calories,
+day_of_week
+From [dbo].[dailyActivity_merged]
+Group By  day_of_week
+
+```
+Result: *No trends or patterns found*
+
+| total_steps | total_dist | total_calories | day_of_week |
+|-------------|------------|----------------|-------------|
+| 1133906     | 763        | 345393         | Wednesday   |
+| 1010969     | 676        | 292016         | Saturday    |
+| 933704      | 613        | 278905         | Monday      |
+| 838921      | 554        | 273823         | Sunday      |
+| 938477      | 614        | 293805         | Friday      |
+| 1088658     | 718        | 323337         | Thursday    |
+| 1235001     | 817        | 358114         | Tuesday     |
+
+```TSQL
+
+--Daily Average analysis - No trends/patterns found
+
+Select AVG(TotalSteps) as avg_steps,
+AVG(TotalDistance) as avg_dist,
+AVG(Calories) as avg_calories,
+day_of_week
+From [dbo].[dailyActivity_merged]
+Group By  day_of_week
+```
+Result: *No trends or patterns found*
+
+| avg_steps   | avg_dist | avg_calories | day_of_week |
+|-------------|----------|--------------|-------------|
+| 7559.373333 | 5.086666 | 2302.62      | Wednesday   |
+| 8152.975806 | 5.451612 | 2354.967741  | Saturday    |
+| 7780.866666 | 5.108333 | 2324.208333  | Monday      |
+| 6933.231404 | 4.578512 | 2263         | Sunday      |
+| 7448.230158 | 4.873015 | 2331.785714  | Friday      |
+| 7405.836734 | 4.884353 | 2199.571428  | Thursday    |
+| 8125.006578 | 5.375    | 2356.013157  | Tuesday     |
 
 ___
 
@@ -226,7 +460,7 @@ ___
 
 In this phase, we will be visualizing the data analyzed and tables created using Tableau Public.
 
-For the interactive version, [Click here](https://public.tableau.com/app/profile/mohammed.amja5151/viz/BikeShareAnalysisVisualized/BikeShareAnalysisVisualized)
+For the interactive version, [Click here](https://public.tableau.com/app/profile/mohammed.amja5151/viz/FitBitCaseStudyVisualized/FitBitCaseStudyVisualized)
 
 **Average Ride Duration:**
 
