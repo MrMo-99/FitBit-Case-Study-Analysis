@@ -10,37 +10,213 @@ ___
 ___
 
 ## Problem Statements
+The Co-founder and Chief Creative Officer of Bellabeat, Urška, wants to develop effective marketing strategies to help unlock new growth oppurtunities for the company. She believes this can be done by analyzing consumer data on smart device usage and gaining insights. 
 
 **The Business Task:**
   * To analyze data to gain insights on how consumers use smart devices.
   * Use the discovered insights to help guide marketing strategies for the company.
-
 ___
 
 ## Preparing Data for Analysis
 
-For this project, I've used the 13 trip-data datasets dated from April 2020 to April 2021. Click on this [link](https://divvy-tripdata.s3.amazonaws.com/index.html) to access the website and download the datasets provided as .zip files. The data provided in this website is made available to access to the public.
+For this project, I've used the 18 datasets dated from 03/12/2016 - 05/12/2016 provided on kaggle. Click on this [FitBit Fitness Tracker Data](https://www.kaggle.com/arashnic/fitbit) (CC0: Public Domain, dataset made available through Mobius) to access the website and download the datasets provided as .csv files. This data set contains personal fitness data from 30 fitbit users on minute-level output for physical activity, heart rate, and sleep monitoring. It also includes information on daily activity, steps, and heart rate that can be used to explore users’ habits. Thirty Fitbit users consented to the submission of personal tracker data and the data provided in this website is made available to access to the public. 
 
 Or you could access and download the data from this repository named as "Raw Data".
 
 I am using Microsoft SQL Server Management Studio in this part of the project to help process and analyze the datasets.
 
 First make sure to import all of the dataset as a .csv file to the database server.
-Check and verify if the data types of each of the columns in each dataset is same to merge them all together.
-
-**Note: The start_station_id column of dataset from Dec 2020 to April 2020 contains string values**
-
-
+In order to solve this business task, only 6 of the given 18 datasets was used. Many of the files are either redundant, is not essential, or relevant, or lacking sufficient data to perform an analysis upon.
 
 ___
 
 
-## Processing of Data
-
-
-
+## Processing and Analysis of Data
+Here, I will be transforming and organizing data by adding new columns, extracting information and removing bad data and duplicates.
 
 **In order to get accurate analysis, validate and make sure the dataset does not include any bias, incorrect data, and duplicates.**
+
+```TSQL
+
+--Checking Number of Rows on dailyActivities
+
+Select Count(*)
+From [dbo].[dailyActivity_merged]
+
+
+--Checking for duplicates in dailyActivity dataset
+
+Select Id, ActivityDate, TotalSteps, Count(*)
+From [dbo].[dailyActivity_merged]
+group by id, ActivityDate, TotalSteps
+Having Count(*) > 1
+
+
+--Modify date format for better understaning in sleepDay
+
+Update sleepDay_merged
+Set SleepDay = Convert(date, SleepDay, 101)
+
+
+--Modify date format for better understaning in dailyActivity
+
+Update dailyActivity_merged
+Set ActivityDate = Convert(date, ActivityDate, 101)
+
+
+--Add day_0f_week column on dailyActivities
+
+Alter Table [dbo].[dailyActivity_merged]
+ADD day_of_week nvarchar(50)
+
+
+--Extract datename from ActivityDate
+
+Update dailyActivity_merged
+SET day_of_week = DATENAME(DW, ActivityDate)
+
+
+--Add sleep data columns on dailyActivity table
+
+Alter Table [dbo].[dailyActivity_merged]
+ADD total_mins_sleep int,
+total_mins_bed int
+
+
+--Add sleep records into dailyActivity table
+
+UPDATE dailyActivity_merged
+Set total_mins_sleep = t2.TotalMinutesAsleep,
+total_mins_bed = t2.TotalTimeInBed 
+From [dbo].[dailyActivity_merged] as t1
+Full Outer Join sleepDay_merged as t2
+on t1.id = t2.id and t1.ActivityDate = t2.SleepDay
+
+
+--Adding specific date format to [dailyActivity_merged] table
+
+Alter table dailyActivity_merged
+Add Date_d date
+
+Update dailyActivity_merged
+Set Date_d = CONVERT( date, ActivityDate, 103 )
+
+
+--Split date and time seperately for [hourlyCalories_merged] table
+
+Alter Table [dbo].[hourlyCalories_merged]
+ADD time_h int
+
+Update [dbo].[hourlyCalories_merged]
+Set time_h = DATEPART(hh, Date_d)
+
+Update [dbo].[hourlyCalories_merged]
+Set Date_d = SUBSTRING(Date_d, 1, 9)
+
+
+--Split date and time seperately for [hourlyIntensities_merged]
+
+Alter Table [dbo].[hourlyIntensities_merged]
+ADD time_h int
+
+Update [dbo].[hourlyIntensities_merged]
+Set time_h = DATEPART(hh, ActivityHour)
+
+Update [dbo].[hourlyIntensities_merged]
+Set ActivityHour = SUBSTRING(ActivityHour, 1, 9)
+
+
+--Split date and time seperately for [hourlySteps_merged]
+
+Alter Table [dbo].[hourlySteps_merged]
+ADD time_h int
+
+Update [dbo].[hourlySteps_merged]
+Set time_h = DATEPART(hh, Date_d)
+
+Update [dbo].[hourlySteps_merged]
+Set Date_d = SUBSTRING(Date_d, 1, 9)
+
+
+--Split date and time seperately for [minuteMETsNarrow_merged]
+
+Alter Table [dbo].[minuteMETsNarrow_merged]
+ADD time_t time
+
+Update [dbo].[minuteMETsNarrow_merged]
+Set time_t = CAST(Date_d as time)
+
+Update [dbo].[minuteMETsNarrow_merged]
+Set time_t = Convert(varchar(5), time_t, 108)
+
+Update [dbo].[minuteMETsNarrow_merged]
+Set Date_d = SUBSTRING(Date_d, 1, 9)
+
+
+--Create new table to merge hourlyCalories, hourlyIntensities, and hourlySteps
+
+Create table hourly_cal_int_step_merge(
+Id numeric(18,0),
+Date_d nvarchar(50),
+time_h int,
+Calories numeric(18,0),
+TotalIntensity numeric(18,0),
+AverageIntensity float,
+StepTotal numeric (18,0)
+)
+
+
+--Insert corresponsing data and merge multiple table into one table
+
+Insert Into hourly_cal_int_step_merge (Id, Date_d, time_h, Calories, TotalIntensity, AverageIntensity, StepTotal)
+(Select t1.Id, t1.Date_d, t1.time_h, t1.Calories, t2.TotalIntensity, t2.AverageIntensity, t3.StepTotal
+From [dbo].[hourlyCalories_merged] as t1
+Inner Join [dbo].[hourlyIntensities_merged] as t2
+ON t1.Id = t2.Id and t1.Date_d = t2.ActivityHour and t1.time_h = t2.time_h
+Inner Join [dbo].[hourlySteps_merged] as t3
+ON t1.Id = t3.Id and t1.Date_d = t3.Date_d and t1.time_h = t3.time_h)
+
+
+--Checking for duplicates
+
+/*Select Id, time_h, Calories, TotalIntensity, AverageIntensity, StepTotal, Count(*) as duplicates
+From [dbo].[hourly_cal_int_step_merge]
+Group by Id, time_h, Calories, TotalIntensity, AverageIntensity, StepTotal
+Having Count(*) > 1*/
+
+
+--Checking for duplicates
+
+/*Select sum(duplicates) as sum_s
+from (Select Id, Date_d time_h, Calories, TotalIntensity, AverageIntensity, StepTotal, Count(*) as duplicates
+From [dbo].[hourly_cal_int_step_merge]
+Group by Id, Date_d, time_h, Calories, TotalIntensity, AverageIntensity, StepTotal
+Having Count(*) > 1
+Order by duplicates DESC) as cte*/
+
+
+--Query in hh:mm time format for better understanding on MET Table 
+
+select Id, Cast(Date_d as date) as date_d, METs, Convert(varchar(5), time_t, 108) as time_t
+From [dbo].[minuteMETsNarrow_merged]
+
+
+--Change date type nvarchar to date on MET table to join properly with other table
+
+Alter table minuteMETsNarrow_merged
+Add dates_d date
+
+Update minuteMETsNarrow_merged
+Set dates_d = Cast(Date_d as date)
+```
+
+Here, I will be analysing the consumer data to discover trends and patterns. 
+
+```TSQL
+
+```
+
+
 
 
 ___
