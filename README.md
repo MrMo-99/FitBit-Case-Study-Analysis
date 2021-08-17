@@ -1,19 +1,19 @@
 # FitBit Fitness Tracker Data Analysis
 #### Author: Mohammed Amja
-#### Date: 23/06/2021
+#### Date: 18/08/2021
 
 *Note: Please refer to the files in this repository to find all of the data/code/graphs/tables found in this report and much more.*
 ___
 
 ## Introduction
- 
-
-
+ Bellabeat is a high-tech company that manufactures health-focused products primarily for women. The company makes products and applications that help monitor their health and wellness such as activity, stress levels, sleep and other mindful habits. Bellabeat is a successful small company that is looking forward to expand their capabilities and improve their products to hopefully become a competitive large player in the global smart device market. Urška Sršen, cofounder and Chief Creative Officer of Bellabeat, is determined to unlock new growth oppurtunities and believes that can be done by analyzing data from smart device fitness gadgets. 
 ___
 
 ## Problem Statements
 
-
+**The Business Task:**
+  * To analyze data to gain insights on how consumers use smart devices.
+  * Use the discovered insights to help guide marketing strategies for the company.
 
 ___
 
