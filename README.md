@@ -462,13 +462,11 @@ In this phase, we will be visualizing the data analyzed and tables created using
 
 For the interactive version, [Click here](https://public.tableau.com/app/profile/mohammed.amja5151/viz/FitBitCaseStudyVisualized/FitBitCaseStudyVisualized)
 
-**Average Ride Duration:**
+**Activity Durations and Calories Relationship:**
 
+![Avg Ride Duration]()
 
-From inferring to the figure shown below. We can conclude that casual members on average tend to ride bikes for a longer duration of time than annual members.
-
-
-![Avg Ride Duration](https://user-images.githubusercontent.com/83900526/123244664-c31be180-d501-11eb-9e92-9929671ecc17.png)
+From inferring to the figure shown above. 
 
 **Users Per Day Of the Week:**
 
