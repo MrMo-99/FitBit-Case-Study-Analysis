@@ -472,6 +472,7 @@ Key Findings:
 * The R-Squared value for Very Active graph is 0.3865
 
 There is a strong correlation between Very Active minutes and the amount of calories burned.
+
 From inferring at the r-squared values, we can conclude that the higher the intensity and the duration of the activity, the more calories is burned.
 
 **Users Per Day Of the Week:**
