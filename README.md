@@ -464,7 +464,7 @@ For the interactive version, [Click here](https://public.tableau.com/app/profile
 
 **Activity Durations and Calories Relationship:**
 
-![Avg Ride Duration]()
+![Activitydurationcalories](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/Activity%20Duration%20and%20Calories%20Burned.PNG)
 
 From inferring to the figure shown above. 
 
