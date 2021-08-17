@@ -466,7 +466,13 @@ For the interactive version, [Click here](https://public.tableau.com/app/profile
 
 ![Activitydurationcalories](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/Activity%20Duration%20and%20Calories%20Burned.PNG)
 
-From inferring to the figure shown above. 
+Key Findings:
+* The R-Squared value for Low Active graph is 0.0118
+* The R-Squared value for Fairly Active graph is 0.0391
+* The R-Squared value for Very Active graph is 0.3865
+
+There is a strong correlation between Very Active minutes and the amount of calories burned.
+From inferring at the r-squared values, we can conclude that the higher the intensity and the duration of the activity, the more calories is burned.
 
 **Users Per Day Of the Week:**
 
