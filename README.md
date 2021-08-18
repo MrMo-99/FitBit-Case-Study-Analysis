@@ -514,37 +514,37 @@ Key Findings:
 The amount of calories burned for every user is highly dependent on their MET values they spend every day. This can be seen by the high r-squared value suggesting that the trend line has strong relation with the data points. 
 
 
-**Hourly Traffic Analysis of Users**
-
-Although both groups seem to prefer evening rides, from **3:00PM - 7:00PM**, annual members also seem to have higher usage in the morning from **6:00AM - 9:00AM**.
-
-![Hourly Traffic](https://user-images.githubusercontent.com/83900526/123246956-ff504180-d503-11eb-8dac-58be3478bf38.png)
+**Sleep and Calories Comparison **
 
 
-**Monthly User Traffic**
+![sleep and calories](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/Sleep%20and%20Calories%20Burned%20Comparison.png)
 
-The graph depicts that irrespective of the user type, the usage of their bikes are highest in the months **June - October**. While lowest traffic occurs from **November - March**.
+Key Findings:
+* The R-Squared value is 0.8727
+* Strong positive corellation between amount of sleep and calories burned. 
 
-![Monthly Traffic](https://user-images.githubusercontent.com/83900526/123247143-3161a380-d504-11eb-8cb9-d4e69a71b35a.png)
+Higher duration of sleep is associated with higher amount of calories burned. An adequate duration and good quality of sleep constitutes to higher calories burned during the sleeping process. 
+
+However sleeping more than the required range doesn't seem to burn more calories and in fact causes the opposite to occur, which is burn fewer calories. 
 
 
-**Most Popular Stations for Casual Users**
+**Popular Time for Activities**
 
-Top 20 most popular stations for casual users.
+![popular time for workouts](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/Popular%20Time%20for%20Workout.png)
 
-![Most Popular Stations for Casuals](https://user-images.githubusercontent.com/83900526/123248777-f1032500-d505-11eb-92d8-8ed2f784613e.png)
+From the graph above, we can infer that the most popular time people are active throughout the day is between **5:00 AM - 9:00PM**
 
 **Tableau Dashboard**
 
 Visualizations built in a dashboard. 
 
-![BikeShare Analysis Dashboard](https://user-images.githubusercontent.com/83900526/123249276-6969e600-d506-11eb-8ecd-9619fb564647.png)
+![dashboard](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/FitBit%20Case%20Study%20Visualized.png)
 
 ___
 
 ## Conclusion
 
-After performing the collection, transformation, cleaning, organisation and analysis of the given 13 datasets, we have enough factual evidence to suggest answers to the business-related questions that were asked.
+After performing the collection, transformation, cleaning, organisation and analysis of the given datasets, we have enough factual evidence to suggest answers to the business-related questions that were asked.
 
 We can infer that casual users are more likely to use their bikes for a longer duration of time. Casual users are also more inclined to ride during evening hours of **3:00PM - 7PM** and weekends is when most of the casual users prefer to ride. While user traffic for both groups are highest during the months of summer, the months of winter is when user traffic significantly drops for both types.
 
