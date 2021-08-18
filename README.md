@@ -3,6 +3,8 @@
 #### Date: 18/08/2021
 
 *Note: Please refer to the files in this repository to find all of the data/code/graphs/tables found in this report and much more.*
+
+*Tableau Visualizations: [Click here](https://public.tableau.com/app/profile/mohammed.amja5151/viz/FitBitCaseStudyVisualized/FitBitCaseStudyVisualized)*
 ___
 
 ## Introduction
@@ -546,16 +548,16 @@ ___
 
 After performing the collection, transformation, cleaning, organisation and analysis of the given datasets, we have enough factual evidence to suggest answers to the business-related questions that were asked.
 
-We can infer that casual users are more likely to use their bikes for a longer duration of time. Casual users are also more inclined to ride during evening hours of **3:00PM - 7PM** and weekends is when most of the casual users prefer to ride. While user traffic for both groups are highest during the months of summer, the months of winter is when user traffic significantly drops for both types.
+We can infer that the duration and the level of intensity of the activities performed are greatly in dependence to the amount of calories burned. METs provide a great insight on the intensity of activities performed and the amount of calories burned per minute. While most of the consumers attain adequate amounts of sleep, it is noticed that a small fraction of the users either oversleep or undersleep. Consumers are also more likely to perform low-high intensity activities in the range of **5:00 AM - 9:00PM** throughout the day.
 
-In order to design new marketing strategies to better focus on and suit the casual users to help convert them into buying annual memberships, we have to refer to the analysis provided above and keep those facts in mind. The recommendations I would provide to help solve this business-related scenario is shown below.
+In order to design new marketing strategies to better focus on unlocking new growth oppurtunities and develop the business, we have to refer to the analysis provided above and keep those facts in mind. The recommendations I would provide to help solve this business-related scenario is shown below.
 
 #### Top Recommendations to Marketing Strategists:
 
-* Implement advertising annual memberships prices more using billboards/posters near the top 20 most popular stations for casual users.
-* Provide a limited discount on annual memberships purchased during the months of lowest traffic to increase rider usage in these months.
-* Have frequent advertisements on social media and television during peak hours and peak months, since that is when most people have a thought about riding bikes.
-* Consider provide free ride minutes for every minute passed after 30 minutes of usage, where the free minutes can **ONLY** be redeemed on weekdays to help promote rider usage during weekdays. 
+* Highlight the MET tracking feature on the smart devices as a marketing strategy and create awareness on MET values. For it allows users to track their level of intensity of activities and provide a real time insight on how much calories they burn every minute.
+* Consumers seem to spend most of their time inactive and live a sedentary lifestyle. Notifying users through smart device notifications during the most popular time for performing activities which is between **5:00 AM - 9:00PM** can remind people to exercise and live a more active lifestyle.
+* Provide app notification for users to remind them to get sufficient sleep every day and implement new sleep measurement features or products such as tracking Rapid Eye Movement (REM) sleep.
+* Consider setting daily/weekly calorie challenges and award points to users based on the top performers. Where the points can be accumulated and redeemed as a discount for their next product purchase. 
 
 
 
