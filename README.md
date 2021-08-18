@@ -505,7 +505,13 @@ To better understand METs more, the approximate METs values while performing cer
 
 
 
-![Users Per Day of Week](https://user-images.githubusercontent.com/83900526/123246014-fe6ae000-d502-11eb-891e-30aa892b178f.png)
+![METs vs Average Calories](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/METs%20vs%20Avg.Calories%20Burned.png)
+
+Key Findings:
+* The R-Squared value is 0.5504
+* Strong positive corellation between METs and average calories burned.
+
+The amount of calories burned for every user is highly dependent on their MET values they spend every day. This can be seen by the high r-squared value suggesting that the trend line has strong relation with the data points. 
 
 
 **Hourly Traffic Analysis of Users**
