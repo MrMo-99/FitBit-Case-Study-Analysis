@@ -462,7 +462,7 @@ In this phase, we will be visualizing the data analyzed and tables created using
 
 For the interactive version, [Click here](https://public.tableau.com/app/profile/mohammed.amja5151/viz/FitBitCaseStudyVisualized/FitBitCaseStudyVisualized)
 
-**Activity Durations and Calories Relationship:**
+### Activity Durations and Calories Relationship:
 
 ![Activitydurationcalories](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/Activity%20Duration%20and%20Calories%20Burned.PNG)
 
@@ -471,13 +471,39 @@ Key Findings:
 * The R-Squared value for Fairly Active graph is 0.0391
 * The R-Squared value for Very Active graph is 0.3865
 
-There is a strong correlation between Very Active minutes and the amount of calories burned.
+There is a strong correlation between Very Active minutes and the amount of calories burned. The r-squared value seems to rise as the intensity and the duration is the activity increases.
 
-From inferring at the r-squared values, we can conclude that the higher the intensity and the duration of the activity, the more calories is burned.
+Thus by inferring to the r-squared values of the respective trend lines of the graphs, we can conclude that the higher the intensity and the duration of the activity, the more calories is burned.
 
-**Users Per Day Of the Week:**
+### METs and Average Calories Burned: 
 
-The data suggests that casual users are more inclined to use the bikes on a weekend, while members tend to use them more on weekdays.
+**A brief overview on METs:**
+
+Metabolic Equivalent of Task (MET) is the ratio of your working metabolic rate relative to your resting metobolic rate. It is a way to describe the intensity of an activity or workout. METs provide a simple and practical way to easily understand the body's energy expenditure with metabolic equivalents.
+
+One MET is defined as resting metabolic rate, it is approximately 3.5 milliliters of oxygen consumed per kilogram of body weight per minute. One MET is the energy a person spends while resting or sitting idle. 
+
+So an MET of 4 means a person is spending 4 times the energy they are when sitting idle. The METs for each person is not constant and can have slight variations depending on their weight, age or other physical parameters. 
+
+To calculate the amount of calories burned per minute, we can use the formula:
+
+**Calories burned per minute = (METs x 3.5 x (your body weight in Kg)) / 200**
+
+To better understand METs more, the approximate METs values while performing certain excersices are depicted below:
+
+| Light < 3.0 METs              | Moderate 3.0–6.0 METs                  | Vigorous > 6.0 METs                       |
+|-------------------------------|----------------------------------------|-------------------------------------------|
+| Sitting at a desk: 1.3        | Housework (cleaning, sweeping): 3.5    | Walking at very brisk pace (4.5 mph): 6.3 |
+| Sitting, playing cards: 1.5   | Weight training (lighter weights): 3.5 | Bicycling 12–14 mph (flat terrain): 8     |
+| Standing at a desk: 1.8       | Golf (walking, pulling clubs): 4.3     | Circuit training (minimal rest): 8        |
+| Strolling at a slow pace: 2.0 | Brisk walking (3.5–4 mph): 5           | Singles tennis: 8                         |
+| Washing dishes: 2.2           | Weight training (heavier weights): 5   | Shoveling, digging ditches: 8.5           |
+| Hatha yoga: 2.5               | Yard work (mowing, moderate effort): 5 | Competitive soccer: 10                    |
+| Fishing (sitting): 2.5        | Swimming laps (leisurely pace): 6      | Running (7 mph): 11.5                     |
+
+*Table Data Taken from*: [healthline.com](https://www.healthline.com/health/what-are-mets#examples)
+
+
 
 ![Users Per Day of Week](https://user-images.githubusercontent.com/83900526/123246014-fe6ae000-d502-11eb-891e-30aa892b178f.png)
 
