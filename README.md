@@ -286,6 +286,7 @@ Result: *Data contains 934 rows, this table limits to view the top 50 rows*
 | 4445114986 | 13-04-2016 | 18230    | 2095     |
 
 ___
+
 ```TSQL
                                                              
 --Activities and colories comparison
@@ -338,8 +339,9 @@ Result: *Strong correlation between activity intense time and calories burned*
 | 8877689391 | 497241      | 2048            | 308             | 7276            | 106028   |
 | 2022484408 | 352490      | 1125            | 600             | 7981            | 77809    |
 
-```TSQL
 ___
+
+```TSQL
 
 --Average Sleep Time per user
 
