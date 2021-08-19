@@ -455,6 +455,20 @@ Result: *No trends or patterns found*
 | 7405.836734 | 4.884353 | 2199.571428  | Thursday    |
 | 8125.006578 | 5.375    | 2356.013157  | Tuesday     |
 
+```TSQL
+--Time Expenditure per day
+Select Distinct Id, SUM(SedentaryMinutes) as sedentary_mins,
+SUM(LightlyActiveMinutes) as lightly_mins,
+SUM(FairlyActiveMinutes) as fairlyactive_mins, 
+SUM(VeryActiveMinutes) as veryactive_mins
+From [dbo].[dailyActivity_merged]
+where total_mins_bed IS NOT NULL
+Group by Id
+```
+Result:
+
+![time spent in a day](https://github.com/MrMo-99/FitBit-Case-Study-Analysis/blob/main/Tableau%20Visualizations/Time%20spent%20in%20a%20day.PNG)
+
 ___
 
 
@@ -503,7 +517,6 @@ To better understand METs more, the approximate METs values while performing cer
 | Hatha yoga: 2.5               | Yard work (mowing, moderate effort): 5 | Competitive soccer: 10                    |
 | Fishing (sitting): 2.5        | Swimming laps (leisurely pace): 6      | Running (7 mph): 11.5                     |
 
-*Table Data Taken from*: [healthline.com](https://www.healthline.com/health/what-are-mets#examples)
 
 
 
