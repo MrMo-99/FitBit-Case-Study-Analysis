@@ -285,7 +285,7 @@ Result: *Data contains 934 rows, this table limits to view the top 50 rows*
 | 4388161847 | 13-04-2016 | 19246    | 3092     |
 | 4445114986 | 13-04-2016 | 18230    | 2095     |
 
-
+___
 ```TSQL
                                                              
 --Activities and colories comparison
@@ -339,6 +339,7 @@ Result: *Strong correlation between activity intense time and calories burned*
 | 2022484408 | 352490      | 1125            | 600             | 7981            | 77809    |
 
 ```TSQL
+___
 
 --Average Sleep Time per user
 
@@ -364,6 +365,8 @@ Result:
 | 4020332650 | 5.822916         | 6.329166       | 30.375            |
 | 4319703577 | 7.94423          | 8.366025       | 25.307692         |
 | 4388161847 | 6.71875          | 7.103472       | 23.083333         |
+
+___
 
 ```TSQL
 
@@ -407,6 +410,7 @@ Result:
 | 8378563200 | 14187         | 15466              | 110539   |
 | 8792009665 | 6535          | 6807               | 34490    |
 
+___
 
 ```TSQL
 
@@ -432,6 +436,8 @@ Result: *No trends or patterns found*
 | 1088658     | 718        | 323337         | Thursday    |
 | 1235001     | 817        | 358114         | Tuesday     |
 
+___
+
 ```TSQL
 
 --Daily Average analysis - No trends/patterns found
@@ -454,6 +460,8 @@ Result: *No trends or patterns found*
 | 7448.230158 | 4.873015 | 2331.785714  | Friday      |
 | 7405.836734 | 4.884353 | 2199.571428  | Thursday    |
 | 8125.006578 | 5.375    | 2356.013157  | Tuesday     |
+
+___
 
 ```TSQL
 --Time Expenditure per day
